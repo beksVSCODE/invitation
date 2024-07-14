@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пригласительное на свидание</title>
+    <link rel="stylesheet" href="./style.css">
+    <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('rsvp-form');
+    const video = document.getElementById('promo-video');
+    const overlay = document.querySelector('.screen-overlay');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://formspree.io/f/meojokbj', true);
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Успешно отправлено
+                handleFormSubmission(); // Другие действия после отправки формы
+                showFullScreenVideo(); // Показываем и воспроизводим видео на весь экран
+            } else if (xhr.readyState === 4) {
+                alert('Не удалось отправить сообщение. Попробуйте еще раз.');
+            }
+        };
+        xhr.send(formData);
+    });
+
+    function handleFormSubmission() {
+        const responseMessage = document.getElementById('response-message');
+        if (responseMessage) {
+            responseMessage.style.display = 'block';
+        }
+        // Дополнительные действия после отправки формы
+    }
+
+    function showFullScreenVideo() {
+        // Показываем карточку с overlay
+        // const card = document.querySelector('.card');
+        // card.classList.add('show-overlay');
+
+        // Показываем и запускаем видео на весь экран
+        video.play();
+        video.requestFullscreen();
+        video.style.display = 'block'
+        // overlay.style.display = 'block'; // Показываем overlay
+    }
+});
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Приглашение на свидание</h1>
+            <p>Сходишь со мной на свидание?</p>
+            <div class="details">
+                <p><strong>Адрес:</strong> Улица Якова Логвиненко, 1в</p>
+                <p><strong>Заведение:</strong> Заандукки</p>
+                <p><strong>Время:</strong> 17:00</p>
+                <p><strong>Дата:</strong> 15.07.24</p>
+            </div>
+            <form id="rsvp-form">
+                <input type="hidden" name="message" value="Она согласилась на свидание!">
+                <button type="submit">Да, хочу!</button>
+            </form>
+            <div id="response-message">Сообщение отправлено!</div>      
+            <div class="screen-overlay"></div>
+        </div>
+        <video id="promo-video" src="./IMG_6849.MP4" controls>
+            Ваш браузер не поддерживает видео.
+        </video>      
+    </div>
+</body>
+</html>

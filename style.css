@@ -1,0 +1,131 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    padding: 0 15px;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative; /* Добавлено для позиционирования кнопки поверх overlay */
+    z-index: 1; /* Установка z-index для карточки над overlay */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет затемнения с прозрачностью 0.5 */
+    z-index: 0; /* Ниже карточки */
+    display: none; /* По умолчанию скрыт */
+}
+.card.show-overlay {
+    z-index: 2; /* Поднимаем карточку над overlay при отображении */
+}
+
+
+h1 {
+    color: #ff69b4;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.details{
+    padding-bottom: 10px;
+}
+.details p {
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+#response-message {
+    margin-top: 20px;
+    color: green;
+    font-size: 1.2em;
+    display: none;
+}
+video {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Чтобы видео занимало всю область и сохраняло пропорции */
+    position: absolute;
+    z-index: 1;
+}
+
+.screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Затемнение с прозрачностью 0.5 */
+    z-index: 3; /* Выше карточки и overlay */
+    display: none; /* Скрыто по умолчанию */
+}
+
+.card.show-overlay .screen-overlay {
+    display: block; /* Показываем затемнение при активации overlay */
+}
+
+
+@media (max-width: 600px) {
+    .card {
+        padding: 20px 30px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
